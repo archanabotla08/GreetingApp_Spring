@@ -1,5 +1,6 @@
 package com.example.demo.greetingapp.controller;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,4 +25,11 @@ public class HelloRestController {
 	public String sayHello(@RequestParam("fname") String fname, @RequestParam("lname") String lname) {
 		return "Hello " + fname + " " + lname;
 	}
+	
+	//	http://localhost:8080/hellorestcontrollerss/param/archana
+	@RequestMapping("/param/{fname}")
+	public String sayHelloParam(@PathVariable String fname) {
+		return "Hello " + fname + "!!" ;
+	}
 }
+
