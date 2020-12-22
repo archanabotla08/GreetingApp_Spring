@@ -1,6 +1,7 @@
 package com.example.demo.greetingapp.controller;
 
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +40,12 @@ public class HelloRestController {
 	@RequestMapping("/post")
 	public String sayHelloPost(@RequestBody User user) {
 		return "Hello "+ user.getFirstName() + " " + user.getLastName() + "!!" ;
+	}
+	
+	//http://localhost:8080/hellorestcontrollerss/put/archana/?lastName=happy
+	@PutMapping("/put/{firstName}")
+	public String sayHelloPut(@PathVariable String firstName,@RequestParam("lastName") String lastName) {
+		return "Hello " + firstName + " " + lastName + "!!!" ;
 	}
 }
 
