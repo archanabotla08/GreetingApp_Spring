@@ -4,10 +4,13 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.greetingapp.model.Greeting;
+import com.example.demo.greetingapp.model.User;
 import com.example.demo.greetingapp.service.GreetingService;
 import com.example.demo.greetingapp.service.IGreetingService;
 
@@ -27,9 +30,19 @@ public class GreetingController {
 
 		return new Greeting(counter.incrementAndGet(),String.format(template, name));
 	}
-	
+	//http://localhost:8080/greetingMsg
 	@GetMapping("/greetingMsg")
 	public String greetingService(String msg) {
 		return GreetingService.message(msg);
+	}
+	//http://localhost:8080/greetingByName
+	@PostMapping("/greetingByName")
+	public String sayHello(@RequestBody User user) {
+		if(user.getFirstName() == null && user.getLastName() == null) {
+			return "Hello World!!!";
+		}else {
+			return "Hello " + user.getFirstName() + " " + user.getLastName() + "!!!";
+		}
+		
 	}
 }
